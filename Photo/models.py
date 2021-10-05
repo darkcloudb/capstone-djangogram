@@ -8,7 +8,7 @@ class PostImg(models.Model):
     image = models.ImageField(upload_to='pics/')
     body = models.CharField(max_length=50)
     username = models.ForeignKey(
-        MyUser,
+        User,
         on_delete=models.CASCADE,
         )
     posted_at = models.DateTimeField(auto_now_add=True)
