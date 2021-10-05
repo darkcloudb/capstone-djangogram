@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %} <br />
+{% extends 'base.html' %} {% block content %} {% include "navbar.html" %}
+
 {% for post in posts %} Posted by: <strong>{{ post.author.username }}</strong
 ><br />
 <img src="{{ post.image.url }}" width="400" height="400" />
