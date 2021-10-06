@@ -4,7 +4,20 @@
 <a href="/post/{{ post.id }}">
   <img src="{{ post.image.url }}" width="400" height="400" />
 </a>
-<p>&#128148; &nbsp; &#129505; &nbsp; 💬</p>
+<!-- <p>
+  &#128148; &nbsp; &#129505; &nbsp; 💬&nbsp; {{ post.favorite.count }} likes
+</p> -->
+<p>
+  <a href="/like/{{ post.id }}">&#129505;</a>&nbsp;<a
+    href="/unlike/{{ post.id }}"
+    >&#128148;</a
+  >&nbsp;<a href="/">💬</a>&nbsp;{{ post.likes|add:post.dislikes }} likes
+</p>
+<!-- {% if post.favorite == False %}
+<h3><a href="/like/{{ post.id }}">&#129505;</a>&nbsp;<a href="/">💬</a></h3>
+{% else %}
+<h3><a href="/unlike/{{ post.id }}">&#128148;</a>&nbsp;<a href="/">💬</a></h3>
+{% endif %} -->
 <p>
   <em>{{ post.posted_at }}</em><br />
   <a href="/post/{{ post.id }}/">{{ post.body }}</a>

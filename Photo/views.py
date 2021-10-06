@@ -40,3 +40,31 @@ class PostDelete(LoginRequiredMixin, View):
             return redirect(reverse('homepage'))
         else:
             return HttpResponse("Access Denied - Only Original Poster or Admin can delete this image.")
+
+# def like_unlike(request, post_id):
+#     post = PostImg.objects.get(id=post_id)
+#     liked = False
+#     if post.liked.filter(id=request.user.id).exists():
+#         post.liked.remove(request.user)
+#         liked = False
+#     else:
+#         post.liked.add(request.user)
+#         liked = True
+#     return redirect(request.META.get("HTTP_REFERER"))
+
+def like_photo(request, post_id):
+    self = request.user
+    photo = PostImg.objects.get(id=post_id)
+    photo.favorite.add(self)
+    photo.likes += 1
+    photo.save()
+    print('liked photo')
+    return redirect(request.META.get("HTTP_REFERER"))
+
+def unlike_photo(request, post_id):
+    self = request.user
+    photo = PostImg.objects.get(id=post_id)
+    photo.dislikes -= 1
+    photo.save()
+    print('unliked photo')
+    return redirect(request.META.get("HTTP_REFERER"))
