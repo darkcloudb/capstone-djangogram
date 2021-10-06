@@ -22,7 +22,7 @@ class PostImage(LoginRequiredMixin, View):
                     body=data['body'],
                     username=request.user
                 )
-                return redirect(reverse("logged"))
+                return redirect(reverse("homepage"))
         return render(request, 'generic_form.html', {'form': form})
 
 

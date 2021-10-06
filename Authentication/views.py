@@ -42,7 +42,7 @@ class LoginView(View):
             )
             if user:
                 login(request, user)
-                return redirect(request.GET.get('next', 'logged'))
+                return redirect(request.GET.get('next', 'homepage'))
 
 
 class LogoutView(View):
