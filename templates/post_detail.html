@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block content %} {% include "navbar.html" %}
+<h1>{{ post.username.username }}'s Post</h1>
+
+<strong>{{ post.username.username }}</strong><br />
+<img src="{{ post.image.url }}" width="400" height="400" />
+<p>
+  <em>{{ post.posted_at }}</em><br />
+  <a href="/post/{{ post.id }}/">{{ post.body }}</a> <br />
+  {% if request.user.is_staff or request.user == post.username %}
+  <a href="/delete/{{ post.id }}/"><button>Delete</button></a>
+  {% endif %}
+</p>
+
+{% endblock %}

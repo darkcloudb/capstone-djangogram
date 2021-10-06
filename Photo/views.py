@@ -1,3 +1,5 @@
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import View
@@ -22,3 +24,19 @@ class PostImage(LoginRequiredMixin, View):
                 )
                 return redirect(reverse("logged"))
         return render(request, 'generic_form.html', {'form': form})
+
+
+class PostDetail(LoginRequiredMixin, View):
+    def get(self, request, post_id):
+        post = PostImg.objects.filter(id=post_id).first()
+        return render(request, 'post_detail.html', {'post': post})
+
+
+class PostDelete(LoginRequiredMixin, View):
+    def get(self, request, post_id=None):
+        post = PostImg.objects.get(id=post_id)
+        if request.user.is_staff or request.user == post.username:
+            post.delete()
+            return redirect(reverse('homepage'))
+        else:
+            return HttpResponse("Access Denied - Only Original Poster or Admin can delete this image.")

@@ -23,10 +23,13 @@ from Photo import views as p_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', auth_view.index_view, name='homepage'),
+    path('', act_view.LoggedInView.as_view(), name='homepage'),
+    # path('', auth_view.index_view, name='homepage'),
     path('signup/', auth_view.SignupView.as_view()),
     path('login/', auth_view.LoginView.as_view()),
     path('logout/', auth_view.LogoutView.as_view()),
-    path('welcome/', act_view.LoggedInView.as_view(), name='logged'),
-    path('post/', p_view.PostImage.as_view())
+    # path('welcome/', act_view.LoggedInView.as_view(), name='logged'),
+    path('post/', p_view.PostImage.as_view()),
+    path('post/<int:post_id>/', p_view.PostDetail.as_view()),
+    path('delete/<int:post_id>/', p_view.PostDelete.as_view())
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
