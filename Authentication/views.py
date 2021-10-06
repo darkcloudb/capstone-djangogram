@@ -23,7 +23,7 @@ class SignupView(View):
                 password=data.get('password')
             )
             login(request, user)
-            return redirect(reverse('logged'))
+            return redirect(reverse('homepage'))
 
 
 class LoginView(View):

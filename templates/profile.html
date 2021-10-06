@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %} {% include "navbar.html" %}
+<h1>Profile</h1>
+<div>
+<p>Title: {{form.title}}</p>
+<p>Author: <a href="/username/{{form.username.id}}/">{{form.username}}</a></p>
+<p>Bio: {{form.bio}}</p>
+<p>Age: {{form.age}}</p>
+</div>
+{{form.id}}
+<button><a href="/edit/{{form.id}}">Edits</a></button>
+{% endblock %}
