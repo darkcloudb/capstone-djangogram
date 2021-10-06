@@ -1,7 +1,9 @@
 {% extends 'base.html' %} {% block content %} {% include "navbar.html" %} <br />
 {% for post in posts %} Posted by: <strong>{{ post.username.username }}</strong
 ><br />
-<img src="{{ post.image.url }}" width="400" height="400" />
+<a href="/post/{{ post.id }}">
+  <img src="{{ post.image.url }}" width="400" height="400" />
+</a>
 <p>
   <em>{{ post.posted_at }}</em><br />
   <a href="/post/{{ post.id }}/">{{ post.body }}</a>
