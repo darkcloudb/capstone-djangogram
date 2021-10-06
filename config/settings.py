@@ -21,13 +21,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+# https://stackoverflow.com/questions/15209978/where-to-store-secret-keys-django
+# Link above showed us how to setup .env file with dotenv
+
 dotenv_file = os.path.join(BASE_DIR, '.env')
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-ae0y*&c)2c*y*zkwb1cg*+%h8535%rx!cm(t98yhh7(*t6+^17'
-SECRET_KEY = os.environ['SECRET KEY']
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
