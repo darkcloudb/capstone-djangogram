@@ -8,10 +8,11 @@
   &#128148; &nbsp; &#129505; &nbsp; 💬&nbsp; {{ post.favorite.count }} likes
 </p> -->
 <p>
-  <a href="/like/{{ post.id }}">&#129505;</a>&nbsp;<a
-    href="/unlike/{{ post.id }}"
-    >&#128148;</a
-  >&nbsp;<a href="/">💬</a>&nbsp;{{ post.likes|add:post.dislikes }} likes
+  <a href="/like/{{ post.id }}/">&#129505;</a>
+  &nbsp;
+  <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
+  <a href="/comment/{{post.id}}/">💬</a>
+  &nbsp; {{ post.likes|add:post.dislikes }} likes
 </p>
 <!-- {% if posts.favorite.all in request.user %}
 <h3><a href="/like/{{ post.id }}">&#129505;</a>&nbsp;<a href="/">💬</a></h3>

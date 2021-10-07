@@ -4,10 +4,11 @@
 <strong>{{ post.username.username }}</strong><br />
 <img src="{{ post.image.url }}" width="400" height="400" />
 <p>
-  <a href="/like/{{ post.id }}">&#129505;</a>&nbsp;<a
-    href="/unlike/{{ post.id }}"
-    >&#128148;</a
-  >&nbsp;<a href="/">💬</a>&nbsp;{{ post.likes|add:post.dislikes }} likes
+  <a href="/like/{{ post.id }}/">&#129505;</a>
+  &nbsp;
+  <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
+  <a href="/comment/{{post.id}}/">💬</a>
+  &nbsp; {{ post.likes|add:post.dislikes }} likes
 </p>
 <p>
   <em>{{ post.posted_at }}</em><br />
@@ -16,9 +17,19 @@
   <a href="/delete/{{ post.id }}/"><button>Delete</button></a>
   {% endif %}
 </p>
-<form action="" method="post" enctype="multipart/form-data">
+
+<!-- <h2>Comments...</h2>
+{% if not post.comments.all %} Empty<a href="/comment/{{ post.id }}/"
+  >Add One</a
+>
+{% else %} <a href="/comment/{{ post.id }}/">Add One</a><br />
+{% for comment in post.comments.all %}
+<strong> {{ comments.username }} - {{comments.posted_at }} </strong>
+
+{{ comment.body }} {% endfor %} {% endif %} -->
+<!-- <form action="" method="post" enctype="multipart/form-data">
   {% csrf_token %} {{ form.as_p }}
   <input type="submit" value="Submit" />
-</form>
+</form> -->
 
 {% endblock %}

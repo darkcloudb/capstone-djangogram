@@ -21,7 +21,7 @@ class PostImage(LoginRequiredMixin, View):
                 post = PostImg.objects.create(
                     image=data['image'],
                     body=data['body'],
-                    username=request.user
+                    username=request.user,
                 )
                 return redirect(reverse("homepage"))
         return render(request, 'generic_form.html', {'form': form})
@@ -32,22 +32,6 @@ class PostDetail(LoginRequiredMixin, View):
         post = PostImg.objects.filter(id=post_id).first()
         return render(request, 'post_detail.html', {'post': post})
 
-# @login_required
-# def post_comment(request, post_id):
-#     post = PostImg.objects.get(id=post_id)
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             data = form.cleaned_data
-#             post.comment = data['comment'],
-#             post.username = data['username']
-#             post.save()
-#             return HttpResponseRedirect(reverse('homepage', args=(post_id,)))
-#     form = CommentForm(initial={
-#         'comment': post.comment
-#     })
-#     return render(request, 'post_detail.html', {'form': form})
-
 
 class PostDelete(LoginRequiredMixin, View):
     def get(self, request, post_id=None):
@@ -57,6 +41,23 @@ class PostDelete(LoginRequiredMixin, View):
             return redirect(reverse('homepage'))
         else:
             return HttpResponse("Access Denied - Only Original Poster or Admin can delete this image.")
+
+# class PostComment(LoginRequiredMixin, View):
+#     def get(self, request, post_id):
+#         post = PostImg.objects.get(id=post_id)
+#         form = CommentForm(initial={
+#             'comment': post.comment
+#         })
+#         return render(request, 'generic_form.html', {'form': form})
+
+#     def post(self, request, post_id):
+#         post = PostImg.objects.get(id=post_id)
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             post.comment = data['comment']
+#             post.save()
+#             return HttpResponseRedirect(reverse('homepage'))
 
 
 def like_photo(request, post_id):
