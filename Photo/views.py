@@ -34,28 +34,6 @@ class PostDetail(LoginRequiredMixin, View):
         post = PostImg.objects.filter(id=post_id).first()
         return render(request, 'post_detail.html', {'post': post})
 
-    def post(self, request, post_id):
-        post = PostImg.objects.get(id=post_id)
-        msg = post.comment.all()
-        # msg = post.comment.filter(active=True)
-        new_msg = None
-        if request.method == 'POST':
-            form = CommentForm(data=request.POST)
-            if form.is_valid():
-                new_msg = form.save(commit=False)
-                new_msg = post
-                new_msg.save()
-        else:
-            form = CommentForm()
-        return render(request, 'post_detail.html', {'post': post, 'form': form})
-
-        # def get_context_data(self, *args, **kwargs):
-        #     context = super().get_context_data(*args, **kwargs)
-        #     context['context_form'] = CommentForm()
-        #     return context
-
-        # return render(request, 'post_detail.html', {'post': post})
-
 
 class PostDelete(LoginRequiredMixin, View):
     def get(self, request, post_id=None):
@@ -73,32 +51,17 @@ class PostComment(LoginRequiredMixin, View):
         return render(request, 'post_detail.html', {'post': post, 'form': form})
 
     def post(self, request, post_id):
-        post = PostImg.objects.get(id=post_id)
-        msg = post.comments.filter(active=True)
-        new_msg = None
         if request.method == 'POST':
-            form = CommentForm(data=request.POST)
+            form = CommentForm(request.POST)
             if form.is_valid():
-                new_msg = form.save(commit=False)
-                new_msg = post
-                new_msg.save()
+                data = form.cleaned_data
+                make_comment = Comment.objects.create(
+                    comment=data['comment'],
+                    username=request.user
+                )
         else:
             form = CommentForm()
         return render(request, 'post_detail.html', {'post': post, 'form': form})
-
-    # def get(self, request, post_id):
-    #     post = Comment.objects.get(id=post_id)
-    #     form = CommentForm()
-    #     return render(request, 'generic_form.html', {'form': form})
-
-    # def post(self, request, post_id):
-    #     post = Comment.objects.get(id=post_id)
-    #     form = CommentForm(request.POST)
-    #     if form.is_valid():
-    #         data = form.cleaned_data
-    #         post.comment = data['comment']
-    #         post.save()
-    #         return HttpResponseRedirect(reverse('homepage'))
 
 
 def like_photo(request, post_id):

@@ -2,4 +2,4 @@ from django import forms
 
 
 class CommentForm(forms.Form):
-    body = forms.CharField(widget=forms.Textarea)
+    comment = forms.CharField(widget=forms.Textarea)
