@@ -3,7 +3,7 @@ from Photo.models import PostImg
 from django.contrib.auth.models import User
 
 class Comment(models.Model):
-    comment = models.ForeignKey(PostImg, related_name='comments', on_delete=models.CASCADE)
+    post = models.ForeignKey(PostImg, related_name='comments', on_delete=models.CASCADE)
     # name = CharField()
     body = models.TextField()
     username = models.ForeignKey(User, on_delete=models.CASCADE)
