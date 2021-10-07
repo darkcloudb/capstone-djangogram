@@ -13,7 +13,7 @@
     >&#128148;</a
   >&nbsp;<a href="/">💬</a>&nbsp;{{ post.likes|add:post.dislikes }} likes
 </p>
-<!-- {% if post.favorite == False %}
+<!-- {% if posts.favorite.all in request.user %}
 <h3><a href="/like/{{ post.id }}">&#129505;</a>&nbsp;<a href="/">💬</a></h3>
 {% else %}
 <h3><a href="/unlike/{{ post.id }}">&#128148;</a>&nbsp;<a href="/">💬</a></h3>

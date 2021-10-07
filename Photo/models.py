@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from Account.models import MyUser
 
-# Create your models here.
 
 class PostImg(models.Model):
     image = models.ImageField(upload_to='pics/')

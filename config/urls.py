@@ -31,6 +31,7 @@ urlpatterns = [
     # path('welcome/', act_view.LoggedInView.as_view(), name='logged'),
     path('post/', p_view.PostImage.as_view()),
     path('post/<int:post_id>/', p_view.PostDetail.as_view()),
+    # path('comment/<int:post_id>/', p_view.post_comment),
     path('delete/<int:post_id>/', p_view.PostDelete.as_view()),
     path('profile/<int:id>/', act_view.profile_detail),
     path('edit/<int:id>/', act_view.edit),
