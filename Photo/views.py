@@ -83,26 +83,29 @@ class PostComment(LoginRequiredMixin, View):
     #             data = form.cleaned_data
     #             post_comment = Comment(
     #                 username=request.user,
-    #                 post=data['comment'],
+    #                 post=data['body'],
     #                 grab=grab
     #             )
     #             post_comment.save()
 
     #     # comments = Comment.objects.filter(post=post).order_by('-posted_at')
-    #     return render(request, 'post_detail.html', {'post': post, 'form': form})
+    #     return render(request, 'post_detail.html', {'grab': grab, 'form': form})
 
     def post(self, request, post_id):
         grab = PostImg.objects.get(id=post_id)
-        form = CommentForm(request.POST)
+        # comments = grab.comments.filter(active=True)
+        # new_comment = None
         if request.method == 'POST':
+            form = CommentForm(request.POST)
             if form.is_valid():
                 data = form.cleaned_data
-                make_comment = Comment(
-                    username=request.user,
-                    post=data['comment'],
-                    grab=grab
-                )
-                make_comment.save()
+                form.save()
+                # make_comment = Comment(
+                #     username=request.user,
+                #     post=data['body'],
+                #     grab=grab
+                # )
+                # make_comment.save()
         else:
             form = CommentForm()
         return render(request, 'post_detail.html', {'form': form})

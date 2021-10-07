@@ -4,5 +4,5 @@ class PostForm(forms.Form):
     image = forms.ImageField()
     body = forms.CharField(widget=forms.Textarea)
 
-class CommentForm(forms.Form):
+class CommentForm(forms.ModelForm):
     comment = forms.CharField(widget=forms.Textarea)
