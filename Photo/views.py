@@ -32,21 +32,21 @@ class PostDetail(LoginRequiredMixin, View):
         post = PostImg.objects.filter(id=post_id).first()
         return render(request, 'post_detail.html', {'post': post})
 
-@login_required
-def post_comment(request, post_id):
-    post = PostImg.objects.get(id=post_id)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            post.comment = data['comment'],
-            post.username = data['username']
-            post.save()
-            return HttpResponseRedirect(reverse('homepage', args=(post_id,)))
-    form = CommentForm(initial={
-        'comment': post.comment
-    })
-    return render(request, 'post_detail.html', {'form': form})
+# @login_required
+# def post_comment(request, post_id):
+#     post = PostImg.objects.get(id=post_id)
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         if form.is_valid():
+#             data = form.cleaned_data
+#             post.comment = data['comment'],
+#             post.username = data['username']
+#             post.save()
+#             return HttpResponseRedirect(reverse('homepage', args=(post_id,)))
+#     form = CommentForm(initial={
+#         'comment': post.comment
+#     })
+#     return render(request, 'post_detail.html', {'form': form})
 
 
 class PostDelete(LoginRequiredMixin, View):
