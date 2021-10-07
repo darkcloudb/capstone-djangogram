@@ -51,17 +51,28 @@ class PostComment(LoginRequiredMixin, View):
         return render(request, 'post_detail.html', {'post': post, 'form': form})
 
     def post(self, request, post_id):
+        post = PostImg.objects.get(id=post_id)
+        # comments = post.comment.all()
+        new_comment = None
         if request.method == 'POST':
             form = CommentForm(request.POST)
             if form.is_valid():
-                data = form.cleaned_data
-                make_comment = Comment.objects.create(
-                    comment=data['comment'],
-                    username=request.user
-                )
+                new_comment = form.save(commit=False)
+                new_comment.post = post
+                new_comment.save()
+        # if request.method == 'POST':
+        #     form = CommentForm(request.POST)
+        #     # post = PostImg.objects.filter(id=post_id).first()
+        #     if form.is_valid():
+        #         data = form.cleaned_data
+        #         make_comment = Comment.objects.create(
+        #             # post=self.get_object(),
+        #             comment=data['comment'],
+        #             username=request.user
+        #         )
         else:
             form = CommentForm()
-        return render(request, 'post_detail.html', {'post': post, 'form': form})
+        return render(request, 'post_detail.html', {'form': form, 'post': post, 'comments': comments, 'new_comment': new_comment})
 
 
 def like_photo(request, post_id):
