@@ -18,18 +18,14 @@
   {% endif %}
 </p>
 
-<!-- <h2>Comments...</h2>
-{% if not post.comments.all %} Empty<a href="/comment/{{ post.id }}/"
-  >Add One</a
->
-{% else %} <a href="/comment/{{ post.id }}/">Add One</a><br />
-{% for comment in post.comments.all %}
-<strong> {{ comments.username }} - {{comments.posted_at }} </strong>
-
-{{ comment.body }} {% endfor %} {% endif %} -->
-<!-- <form action="" method="post" enctype="multipart/form-data">
+<h2>Comments...</h2>
+{% if not post.comments.all %} {% else %} {% for comment in post.comments.all %}
+<strong> {{ comment.username }} - {{ comment.posted_at }} </strong>
+<br />
+{{ comment.body }} {% endfor %} {% endif %}
+<form action="" method="post">
   {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Submit" />
-</form> -->
+  <input type="submit" value="Comment" />
+</form>
 
 {% endblock %}

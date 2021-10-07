@@ -5,4 +5,4 @@ class PostForm(forms.Form):
     body = forms.CharField(widget=forms.Textarea)
 
 class CommentForm(forms.Form):
-    body = forms.CharField(widget=forms.Textarea)
+    comment = forms.CharField(widget=forms.Textarea)
