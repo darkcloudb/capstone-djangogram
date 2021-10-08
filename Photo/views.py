@@ -32,31 +32,27 @@ class PostImage(LoginRequiredMixin, View):
 
 
 class PostDetail(LoginRequiredMixin, View):
+    # Thank you so much Marcus for the assist in figuring out the issue with our comment 
     def get(self, request, post_id):
         post = PostImg.objects.filter(id=post_id).first()
-        return render(request, 'post_detail.html', {'post': post})
+        form = CommentForm()
+        return render(request, 'post_detail.html', {'post': post, "form": form})
 
-# class PostDetail(DetailView):
-#     model = PostImg
-#     template_name = 'post_detail.html'
-#     context_object_name = 'post'
-
-# def post(request, post_id):
-#     post = PostImg.objects.get(pk=post_id)
-#     form = CommentForm()
-#     if request.method == 'POST':
-#         form = CommentForm(request.POST)
-#         if form.is_valid():
-#             data=form.cleaned_data
-#             comment = Comment(
-#                 username=request.user,
-#                 body=data['comment'],
-#                 post=post
-#             )
-#             comment.save()
-
-#     comments = Comment.objects.filter(post=post).order_by('-posted_at')
-#     return render(request, post_id, {'post': post, 'comments': comments, 'form': form})
+    def post(self, request, post_id):
+        grab = PostImg.objects.get(id=post_id)
+        if request.method == 'POST':
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data
+                print(data)
+                make_comment = Comment(
+                    username=request.user,
+                    body=data['body'],
+                    post=grab
+                )
+                make_comment.save()
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        return render(request, 'post_detail.html', {'form': form})
 
 
 class PostDelete(LoginRequiredMixin, View):
@@ -67,48 +63,6 @@ class PostDelete(LoginRequiredMixin, View):
             return redirect(reverse('homepage'))
         else:
             return HttpResponse("Access Denied - Only Original Poster or Admin can delete this image.")
-
-class PostComment(LoginRequiredMixin, View):
-    def get(self, request, post_id):
-        post = PostImg.objects.filter(id=post_id).first()
-        form = CommentForm()
-        return render(request, 'post_detail.html', {'post': post, 'form': form})
-
-    # def post(self, request, post_id):
-    #     if request.method == 'POST':
-    #         grab = PostImg.objects.get(pk=post_id)
-    #         form = CommentForm()
-    #         form = CommentForm(request.POST)
-    #         if form.is_valid():
-    #             data = form.cleaned_data
-    #             post_comment = Comment(
-    #                 username=request.user,
-    #                 post=data['body'],
-    #                 grab=grab
-    #             )
-    #             post_comment.save()
-
-    #     # comments = Comment.objects.filter(post=post).order_by('-posted_at')
-    #     return render(request, 'post_detail.html', {'grab': grab, 'form': form})
-
-    def post(self, request, post_id):
-        grab = PostImg.objects.get(id=post_id)
-        # comments = grab.comments.filter(active=True)
-        # new_comment = None
-        if request.method == 'POST':
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                data = form.cleaned_data
-                form.save()
-                # make_comment = Comment(
-                #     username=request.user,
-                #     post=data['body'],
-                #     grab=grab
-                # )
-                # make_comment.save()
-        else:
-            form = CommentForm()
-        return render(request, 'post_detail.html', {'form': form})
 
 
 def like_photo(request, post_id):
