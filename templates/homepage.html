@@ -11,7 +11,7 @@
   <a href="/like/{{ post.id }}/">&#129505;</a>
   &nbsp;
   <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
-  <a href="/comment/{{post.id}}/">💬</a>
+  <a href="/post/{{ post.id }}/">💬</a>
   &nbsp; {{ post.likes|add:post.dislikes }} likes
 </p>
 <!-- {% if posts.favorite.all in request.user %}
