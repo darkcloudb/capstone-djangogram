@@ -9,7 +9,6 @@ from Comment.models import Comment
 from Photo.forms import PostForm
 from Comment.forms import CommentForm
 from django.contrib.auth.decorators import login_required
-from django.views.generic.detail import DetailView
 
 
 class PostImage(LoginRequiredMixin, View):
