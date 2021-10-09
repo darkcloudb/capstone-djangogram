@@ -67,16 +67,23 @@ class PostDelete(LoginRequiredMixin, View):
 class CommentDelete(LoginRequiredMixin, View):
     def get(self, request, post_id=None):
         comment = Comment.objects.get(id=post_id)
-        post = PostImg.objects.get(id=request.user.id)
-        self = request.user
         if request.user.is_staff or request.user == comment.username:
-            comment.delete()
-            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-        elif post:
             comment.delete()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             return HttpResponse("Access Denied - You do not have permission to delete this comment.")
+
+
+class SuperDelete(LoginRequiredMixin, View):
+    def get(self, request, post_id=None):
+        comment = Comment.objects.get(id=post_id)
+        post = PostImg.objects.get(id=request.user.id)
+        if post:
+            comment.delete()
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+        else:
+            return HttpResponse("Access Denied - You do not have permission to delete this comment.")
+
 
 
 def like_photo(request, post_id):
