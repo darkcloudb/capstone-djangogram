@@ -36,5 +36,5 @@ urlpatterns = [
     path('profile/<int:id>/', act_view.profile_detail),
     path('edit/<int:id>/', act_view.edit),
     path('like/<int:post_id>/', p_view.like_photo),
-    path('unlike/<int:post_id>/', p_view.unlike_photo)
+    path('unlike/<int:post_id>/', p_view.unlike_photo),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -85,7 +85,6 @@ class SuperDelete(LoginRequiredMixin, View):
             return HttpResponse("Access Denied - You do not have permission to delete this comment.")
 
 
-
 def like_photo(request, post_id):
     self = request.user
     photo = PostImg.objects.get(id=post_id)
