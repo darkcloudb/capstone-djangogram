@@ -1,31 +1,57 @@
-{% extends 'base.html' %} {% block content %} {% include "navbar.html" %}
+{% extends 'base.html' %} {% block content %}
 <h1>{{ post.username.username }}'s Post</h1>
-
-<strong>{{ post.username.username }}</strong><br />
 <img src="{{ post.image.url }}" width="400" height="400" />
-<p>
+<!-- <p>
   <a href="/like/{{ post.id }}/">&#129505;</a>
   &nbsp;
   <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
   <a href="/post/{{ post.id }}/">💬</a>
   &nbsp; {{ post.likes|add:post.dislikes }} likes
+</p> -->
+<p>
+  {% if request.user.is_staff or request.user == post.username %}
+  <a href="/like/{{ post.id }}/">&#129505;</a>
+  &nbsp;
+  <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
+  <a href="/post/{{ post.id }}/">💬</a>
+  &nbsp; {{ post.likes|add:post.dislikes }} likes
+  <a href="/delete/{{ post.id }}/"><button>Delete</button></a>
+  {% else %}
+  <a href="/like/{{ post.id }}/">&#129505;</a>
+  &nbsp;
+  <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
+  <a href="/post/{{ post.id }}/">💬</a>
+  &nbsp; {{ post.likes|add:post.dislikes }} likes {% endif %}
 </p>
 <p>
   <em>{{ post.posted_at }}</em><br />
-  <a href="/post/{{ post.id }}/">{{ post.body }}</a> <br />
-  {% if request.user.is_staff or request.user == post.username %}
-  <a href="/delete/{{ post.id }}/"><button>Delete</button></a>
-  {% endif %}
+  {{ post.body }}
+  <br />
 </p>
 
-<h2>Comments...</h2>
-{% if not post.comments.all %} {% else %} {% for comment in post.comments.all %}
-<strong> {{ comment.username }} - {{ comment.posted_at }} </strong>
-<br />
-{{ comment.body }} {% endfor %} {% endif %}
+<div>
+  <b>Comments:</b>
+  {% for comment in post.comments.all %}
+  <div>
+    <p>
+      <b>{{ comment.username }} - {{ comment.posted_at }}</b>
+    </p>
+    <p>{{ comment.body }}</p>
+    {% if request.user.is_staff or request.user == post.username %}
+    <p>
+      <a href="#">Delete Comment</a>
+    </p>
+    {% endif %}
+  </div>
+  {% empty %}
+  <div>
+    <p>No comments.</p>
+  </div>
+</div>
+{% endfor %}
 <form action="" method="post">
   {% csrf_token %} {{ form.as_p }}
   <input type="submit" value="Comment" />
 </form>
 
-{% endblock %}
+<!-- {% endblock %} -->
