@@ -5,6 +5,7 @@
     <img src="{{ post.image.url }}" width="400" height="400" />
   </a>
   <p>
+    &nbsp;
     <a href="/like/{{ post.id }}/">&#129505;</a>
     &nbsp;
     <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
@@ -13,9 +14,11 @@
   </p>
   <p>
     <em
-      >Posted by: <b>{{ post.username.username }}</b> - {{ post.posted_at }}</em
+      >&nbsp;Posted by: <b>{{ post.username.username }}</b> - {{ post.posted_at
+      }}</em
     ><br />
-    {{ post.body }}
+    &nbsp;{{ post.body }}
   </p>
-  {% endfor %} {% endblock %}
 </div>
+<br />
+{% endfor %} {% endblock %}

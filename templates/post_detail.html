@@ -1,46 +1,47 @@
 {% extends 'base.html' %} {% block content %}
-<h1>{{ post.username.username }}'s Post</h1>
-<img src="{{ post.image.url }}" width="400" height="400" />
-<!-- <p>
+<div class="post">
+  <img src="{{ post.image.url }}" width="400" height="400" />
+  <!-- <p>
   <a href="/like/{{ post.id }}/">&#129505;</a>
   &nbsp;
   <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
   <a href="/post/{{ post.id }}/">💬</a>
   &nbsp; {{ post.likes|add:post.dislikes }} likes
 </p> -->
-<p>
-  {% if request.user.is_staff or request.user == post.username %}
-  <a href="/like/{{ post.id }}/">&#129505;</a>
-  &nbsp;
-  <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
-  <a href="/post/{{ post.id }}/">💬</a>
-  &nbsp; {{ post.likes|add:post.dislikes }} likes
-  <a href="/delete/{{ post.id }}/"><button>Delete</button></a>
-  {% else %}
-  <a href="/like/{{ post.id }}/">&#129505;</a>
-  &nbsp;
-  <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
-  <a href="/post/{{ post.id }}/">💬</a>
-  &nbsp; {{ post.likes|add:post.dislikes }} likes {% endif %}
-</p>
-<p>
-  <em>{{ post.posted_at }}</em><br />
-  {{ post.body }}
-  <br />
-</p>
+  <p>
+    {% if request.user.is_staff or request.user == post.username %} &nbsp;
+    <a href="/like/{{ post.id }}/">&#129505;</a>
+    &nbsp;
+    <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
+    <a href="/post/{{ post.id }}/">💬</a>
+    &nbsp; {{ post.likes|add:post.dislikes }} likes
+    <a href="/delete/{{ post.id }}/"><button>Delete</button></a>
+    {% else %} &nbsp;
+    <a href="/like/{{ post.id }}/">&#129505;</a>
+    &nbsp;
+    <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
+    <a href="/post/{{ post.id }}/">💬</a>
+    &nbsp; {{ post.likes|add:post.dislikes }} likes {% endif %}
+  </p>
+  <p>
+    <em>&nbsp;{{ post.posted_at }}</em><br />
+    &nbsp;{{ post.body }}
+    <br />
+  </p>
+</div>
 
-<div>
+<div class="comments--section">
   <b>Comments:</b>
   {% for comment in post.comments.all %}
-  <div>
-    <p>
-      <b>{{ comment.username }} - {{ comment.posted_at }}</b>
+  <div class="comments--border">
+    <p class="comments--user">
+      <b>&nbsp;{{ comment.username }} - {{ comment.posted_at }}</b>
     </p>
-    <p>{{ comment.body }}</p>
-    {% if request.user.is_staff or request.user == post.username %}
-    <p>
-      <a href="#">Delete Comment</a>
-    </p>
+    <p class="comments--entry">&nbsp;{{ comment.body }}</p>
+    {% if request.user.is_staff or request.user == comment.username %}
+    <p>&nbsp;<a href="/uncomment/{{ comment.id }}/">Delete Comment</a></p>
+    {% endif %} {% if request.user == post.username %}
+    <p>&nbsp;<a href="/uncomment/{{ comment.id }}/">Delete Comment</a></p>
     {% endif %}
   </div>
   {% empty %}
