@@ -27,11 +27,15 @@
         float: left;
         margin-left: 100px;
       }
+      a {
+        text-decoration: none !important;
+        color: black !important;
+      }
       .right {
         float: right;
-        margin-right: 25px;
+        margin-right: 100px;
         font-family: "Times New Roman";
-        font-size: 90%;
+        font-size: 100%;
       }
       .header > a {
         color: inherit;
@@ -77,13 +81,13 @@
       </div>
       <div class="right">
         {% if not user.is_authenticated %}
-        <a href="/">Home</a>
-        <a href="/login/">Login</a>
+        <a href="/">🏠</a>
+        <a href="/login/">↩</a>
         {% else %}
-        <a href="/">Home</a>
-        <a href="/post/">Upload Image</a>
-        <a href="/profile/">Profile</a>
-        <a href="/logout/">Logout</a>
+        <a href="/">🏠</a>
+        <a href="/post/">✉</a>
+        <a href="/profile/">↔</a>
+        <a href="/logout/">🔚</a>
         {% endif %}
       </div>
     </div>
