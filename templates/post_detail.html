@@ -22,6 +22,13 @@
     <br />
   </p>
 </div>
+<div class="post">
+  <form action="" method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" value="Comment" />
+  </form>
+  &nbsp;
+</div>
 
 <div class="comments--section">
   <b>Comments:</b>
@@ -43,9 +50,5 @@
   </div>
 </div>
 {% endfor %}
-<form action="" method="post">
-  {% csrf_token %} {{ form.as_p }}
-  <input type="submit" value="Comment" />
-</form>
 
 <!-- {% endblock %} -->
