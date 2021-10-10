@@ -1,0 +1,8 @@
+{% extends 'base.html' %} {% block content %} {% include "navbar.html" %}
+<form action="" method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }}
+  <input type="submit" value="Submit" />
+</form>
+{% if request.user.is_authenticated == False %}
+<p>No account? <a href="/signup/">Sign up here!</a></p>
+{% endif %} {% endblock %}

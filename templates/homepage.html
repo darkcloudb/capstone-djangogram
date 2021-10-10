@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %} <br />
+{% for post in posts %}
+<div class="post">
+  <a href="/post/{{ post.id }}">
+    <img src="{{ post.image.url }}" width="400" height="400" />
+  </a>
+  <p class="like">
+    &nbsp;
+    <a href="/like/{{ post.id }}/">&#129505;</a>
+    &nbsp;
+    <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
+    <a href="/post/{{ post.id }}/">💬</a>
+    &nbsp; {{ post.likes|add:post.dislikes }} likes
+  </p>
+  <p>
+    <em
+      >&nbsp;Posted by: <b>{{post.username.username}}</b> -
+      {{post.posted_at}}</em
+    ><br />
+    &nbsp;{{ post.body }}
+  </p>
+</div>
+<br />
+{% endfor %} {% endblock %}

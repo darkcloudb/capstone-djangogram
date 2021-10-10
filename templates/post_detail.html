@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+<div class="post">
+  <img src="{{ post.image.url }}" width="400" height="400" />
+  <p class="like">
+    {% if request.user.is_staff or request.user == post.username %} &nbsp;
+    <a href="/like/{{ post.id }}/">&#129505;</a>
+    &nbsp;
+    <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
+    <a href="/post/{{ post.id }}/">💬</a>
+    &nbsp; {{ post.likes|add:post.dislikes }} likes
+    <a href="/delete/{{ post.id }}/"><button>Delete &#9760;</button></a>
+    {% else %} &nbsp;
+    <a href="/like/{{ post.id }}/">&#129505;</a>
+    &nbsp;
+    <a href="/unlike/{{ post.id }}/">&#128148;</a>&nbsp;
+    <a href="/post/{{ post.id }}/">💬</a>
+    &nbsp; {{ post.likes|add:post.dislikes }} likes {% endif %}
+  </p>
+  <p>
+    <em>&nbsp;{{ post.posted_at }}</em><br />
+    &nbsp;{{ post.body }}
+    <br />
+  </p>
+</div>
+<div class="post">
+  <form action="" method="post">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" value="Comment" />
+  </form>
+  &nbsp;
+</div>
+
+<div class="comments--section">
+  <b>Comments:</b>
+  {% for comment in post.comments.all %}
+  <div class="comments--border">
+    <p class="comments--user">
+      <b>&nbsp;{{ comment.username }} - {{ comment.posted_at }}</b>
+    </p>
+    <p class="comments--entry">&nbsp;{{ comment.body }}</p>
+    {% if request.user.is_staff or request.user == comment.username %}
+    <p>&nbsp;<a href="/uncomment/{{ comment.id }}/">Delete Comment</a></p>
+    {% elif request.user == post.username %}
+    <p>&nbsp;<a href="/superdel/{{ comment.id }}/">Delete Comment</a></p>
+    {% endif %}
+  </div>
+  {% empty %}
+  <div>
+    <p>No comments.</p>
+  </div>
+</div>
+{% endfor %}
+
+<!-- {% endblock %} -->
