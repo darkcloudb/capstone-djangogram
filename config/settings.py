@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'Authentication',
     'Comment',
     'Like',
-    'Photo'
+    'Photo',
+    'Profile'
 ]
 
 MIDDLEWARE = [
