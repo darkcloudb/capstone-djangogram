@@ -59,7 +59,8 @@ class PostDelete(LoginRequiredMixin, View):
             post.delete()
             return redirect(reverse('homepage'))
         else:
-            return HttpResponse("Access Denied - Only Original Poster or Admin can delete this image.")
+            # return HttpResponse("Access Denied - Only Original Poster or Admin can delete this image.")
+            return render(request, '403.html')
 
 
 class CommentDelete(LoginRequiredMixin, View):
