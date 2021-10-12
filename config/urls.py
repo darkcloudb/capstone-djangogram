@@ -21,6 +21,7 @@ from Authentication import views as auth_view
 from Account import views as act_view
 from Photo import views as p_view
 from Comment import views as c_view
+from config import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,3 +39,7 @@ urlpatterns = [
     path('like/<int:post_id>/', p_view.like_photo),
     path('unlike/<int:post_id>/', p_view.unlike_photo),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = "config.views.page_not_found_view"
+
+handler500 = "config.views.nice_job_view"
