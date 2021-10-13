@@ -21,6 +21,7 @@ from Authentication import views as auth_view
 from Account import views as act_view
 from Photo import views as p_view
 from Comment import views as c_view
+from Video import views as v_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -37,4 +38,5 @@ urlpatterns = [
     path('edit/<int:id>/', act_view.edit),
     path('like/<int:post_id>/', p_view.like_photo),
     path('unlike/<int:post_id>/', p_view.unlike_photo),
+    path('video/', v_view.play_vid),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
