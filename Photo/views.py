@@ -70,7 +70,7 @@ class CommentDelete(LoginRequiredMixin, View):
             comment.delete()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponse("Access Denied - You do not have permission to delete this comment.")
+            return render(request, '403.html')
 
 
 class SuperDelete(LoginRequiredMixin, View):
@@ -81,7 +81,7 @@ class SuperDelete(LoginRequiredMixin, View):
             comment.delete()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponse("Access Denied - You do not have permission to delete this comment.")
+            return render(request, '403.html')
 
 
 def like_photo(request, post_id):

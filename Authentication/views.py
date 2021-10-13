@@ -44,6 +44,8 @@ class LoginView(View):
             if user:
                 login(request, user)
                 return redirect(request.GET.get('next', 'homepage'))
+            else:
+                return render(request, 'incorrect.html')
 
 
 class LogoutView(View):
