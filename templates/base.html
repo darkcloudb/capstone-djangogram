@@ -100,6 +100,10 @@
       .sign {
         font-family: "Snell Roundhand";
       }
+
+      .prof_border{
+        border-radius: 50%;
+      }
     </style>
   </head>
   <body>
@@ -114,7 +118,7 @@
         {% else %}
         <a href="/">🏠</a>
         <a href="/post/">✉</a>
-        <a href="/profile/">↔</a>
+        <a href="/profile/{{request.user.id}}/">↔</a>
         <a href="/logout/">🔚</a>
         {% endif %}
       </div>

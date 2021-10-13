@@ -21,7 +21,7 @@ from Authentication import views as auth_view
 from Account import views as act_view
 from Photo import views as p_view
 # from Comment import views as c_view
-from Profile import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,7 +35,6 @@ urlpatterns = [
     path('uncomment/<int:post_id>/', p_view.CommentDelete.as_view()),
     path('superdel/<int:post_id>/', p_view.SuperDelete.as_view()),
     path('profile/<int:id>/', act_view.profile_detail),
-    path('profile_page/', views.register_user),
     path('edit/<int:id>/', act_view.edit),
     path('like/<int:post_id>/', p_view.like_photo),
     path('unlike/<int:post_id>/', p_view.unlike_photo),
