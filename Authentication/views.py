@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 # Login, Signup, and Logout views
 
+
 class SignupView(View):
     def get(self, request):
         form = SignUpForm()
@@ -18,13 +19,27 @@ class SignupView(View):
         form = SignUpForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
-            user = MyUser.objects.create_user(
-                username=data.get('username'),
-                password=data.get('password'),
-                bio=data.get('bio')
-            )
-            login(request, user)
-            return redirect(reverse('homepage'))
+            if data.password1 == data.password2:
+                try:
+                    user = MyUser.objetcs.get(username=data.username)
+                    context = {'form':form, 'error': 'This username already exists'}
+                    return render(request, 'signup.html', context)
+                except MyUser.DoesNotExist:
+                    user = MyUser.objects.create_user(
+                        username=data.get('username'),
+                        password=data.get('password1'),
+                        email=data.get('email'),
+                        age=data.get('age'),
+                        bio=data.get('bio')
+                    )
+                    login(request, user)
+                    return redirect(reverse('homepage'))
+            else:
+                context = {'form': form, 'error': 'The passwords do not match'}
+                return render(request, 'signup.html', context)
+        else:
+            form = SignUpForm() 
+            return render(request, 'signup.html', {'form': form})
 
 
 class LoginView(View):
