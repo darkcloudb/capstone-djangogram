@@ -1,5 +1,5 @@
 from django import forms
-from django.forms.widgets import Textarea
+from django.forms.widgets import PasswordInput, Textarea
 
 
 class LoginForm(forms.Form):
