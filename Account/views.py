@@ -21,22 +21,7 @@ def profile_detail(request, id):
     profile = MyUser.objects.get(id=id)
     context = {"profile": profile}
     return render(request, template_name, context)
-
-
-# @login_required
-# def edit(request, id=None, template_name='profile.html'):
-#     if id:
-#         bio = get_object_or_404(MyUser, pk=id)
-#         if bio.username != request.user:
-#             return render(request, '403.html')
-#     else:
-#         bio = MyUser(username=request.user)
-#         form = EditBioForm(request.POST or None, instance=bio)
-#         if request.POST and form.is_valid():
-#             form.save()
-#             redirect_url = reverse('bio_save_success')
-#             return redirect(redirect_url)
-#         return render(request, template_name, {'form': form})
+ 
 
 class EditProfile(LoginRequiredMixin, View):
     def get(self, request, id):
