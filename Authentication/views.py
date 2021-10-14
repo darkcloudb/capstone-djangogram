@@ -73,9 +73,3 @@ class LogoutView(View):
         logout(request)
         return redirect(reverse('homepage'))
 
-
-#temporary for testing
-@login_required
-def index_view(request):
-    form = SignUpForm()
-    return render(request, 'index.html', {'form': form})
