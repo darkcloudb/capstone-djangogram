@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, HttpResponse, HttpResponseRedirect, get_object_or_404, redirect
+from django.shortcuts import render, reverse, HttpResponse, get_object_or_404, redirect
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from Account.forms import EditBioForm
@@ -7,6 +7,7 @@ from Photo.models import PostImg
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 # Create your views here.
+
 
 class LoggedInView(LoginRequiredMixin, View):
     def get(self, request):

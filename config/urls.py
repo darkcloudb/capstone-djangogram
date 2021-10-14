@@ -20,7 +20,8 @@ from django.conf.urls.static import static
 from Authentication import views as auth_view
 from Account import views as act_view
 from Photo import views as p_view
-from Comment import views as c_view
+# from Comment import views as c_view
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
