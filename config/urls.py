@@ -23,6 +23,7 @@ from Photo import views as p_view
 from Comment import views as c_view
 from config import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', act_view.LoggedInView.as_view(), name='homepage'),
