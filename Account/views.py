@@ -27,7 +27,7 @@ def edit(request, id=None, template_name='profile.html'):
     if id:
         bio = get_object_or_404(MyUser, pk=id)
         if bio.username != request.user:
-            return HttpResponseForbidden()
+            return render(request, '403.html')
     else:
         bio = MyUser(username=request.user)
         form = EditBioForm(request.POST or None, instance=bio)

@@ -11,7 +11,7 @@ class MyUser(AbstractUser):
     bio = models.CharField(max_length=200)
     age = IntegerField(default=0)
     prof_pic = models.ImageField(
-        default='default.jpg', upload_to='profile_pics')
+        default='default.jpg', upload_to='pics/')
     email = models.EmailField(max_length=150)
 
     def __str__(self):

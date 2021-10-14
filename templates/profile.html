@@ -1,10 +1,17 @@
 {% extends 'base.html' %} {% block content %}
-<h1><img class="prof_border" src="{{ profile.prof_pic.url }}" width="50" height="50" /> {{profile.username}} </h1>
+<h1>
+  <img
+    class="prof_border"
+    src="{{ profile.prof_pic.url }}"
+    width="50"
+    height="50"
+  />
+  {{profile.username}}
+</h1>
 <div>
- 
   <p>Bio: {{profile.bio}}</p>
   <p>Age: {{profile.age}}</p>
 </div>
-{{form.id}}
-<button><a href="/edit/{{form.id}}">Edits</a></button>
+{{profile.id}}
+<button><a href="/edit/{{profile.id}}">Edits</a></button>
 {% endblock %}
