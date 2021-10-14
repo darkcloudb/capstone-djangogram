@@ -35,8 +35,8 @@ urlpatterns = [
     path('delete/<int:post_id>/', p_view.PostDelete.as_view()),
     path('uncomment/<int:post_id>/', p_view.CommentDelete.as_view()),
     path('superdel/<int:post_id>/', p_view.SuperDelete.as_view()),
-    path('profile/<int:id>/', act_view.profile_detail),
-    path('edit/<int:id>/', act_view.edit),
+    path('profile/<int:id>/', act_view.profile_detail, name='profile'),
+    path('edit/<int:id>/', act_view.EditProfile.as_view()),
     path('like/<int:post_id>/', p_view.like_photo),
     path('unlike/<int:post_id>/', p_view.unlike_photo),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

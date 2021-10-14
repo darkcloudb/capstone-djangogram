@@ -33,7 +33,7 @@ class SignupView(View):
                         password=data.get('password1'),
                         email=data.get('email'),
                         age=data.get('age'),
-                        bio=data.get('bio')
+                        bio=data.get('bio'),
                         )
                     login(request, user)
                     return redirect(reverse('homepage'))
