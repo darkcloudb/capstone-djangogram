@@ -1,3 +1,4 @@
+
 from typing import AsyncGenerator, BinaryIO
 from django.shortcuts import render, reverse, HttpResponseRedirect, get_object_or_404, redirect
 from django.views.generic import View
@@ -8,7 +9,6 @@ from Photo.models import PostImg
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 # Create your views here.
-
 
 class LoggedInView(LoginRequiredMixin, View):
     def get(self, request):
@@ -21,6 +21,7 @@ def profile_detail(request, id):
     profile = MyUser.objects.get(id=id)
     context = {"profile": profile}
     return render(request, template_name, context)
+
  
 
 class EditProfile(LoginRequiredMixin, View):
@@ -51,3 +52,4 @@ class EditProfile(LoginRequiredMixin, View):
         else:
             return render(request, '500.html')
         return HttpResponseRedirect(reverse('profile', args=(id,)))
+

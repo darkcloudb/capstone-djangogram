@@ -1,5 +1,5 @@
 from django import forms
-# from django.forms.fields import CharField, IntegerField
+from django.forms.fields import CharField, IntegerField
 
 
 class EditBioForm(forms.Form):
@@ -8,6 +8,3 @@ class EditBioForm(forms.Form):
     email = forms.EmailField()
     prof_pic = forms.ImageField()
 
-
-class ProfileUpdateForm(forms.ModelForm):
-    ...

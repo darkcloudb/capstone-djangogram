@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+
 # Create your views here.
 # Login, Signup, and Logout views
 
@@ -66,6 +67,7 @@ class LoginView(View):
                 return redirect(request.GET.get('next', 'homepage'))
             else:
                 return render(request, 'incorrect.html')
+
 
 
 class LogoutView(View):

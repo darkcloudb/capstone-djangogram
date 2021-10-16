@@ -38,6 +38,7 @@ class PostDetail(LoginRequiredMixin, View):
         else:
             return render(request, '404.html')
 
+
     def post(self, request, post_id):
         grab = PostImg.objects.get(id=post_id)
         if request.method == 'POST':
@@ -66,6 +67,7 @@ class PostDelete(LoginRequiredMixin, View):
             return render(request, '403.html')
 
 
+
 class CommentDelete(LoginRequiredMixin, View):
     def get(self, request, post_id=None):
         comment = Comment.objects.get(id=post_id)
@@ -74,6 +76,7 @@ class CommentDelete(LoginRequiredMixin, View):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             return render(request, '403.html')
+
 
 
 class SuperDelete(LoginRequiredMixin, View):
@@ -85,6 +88,7 @@ class SuperDelete(LoginRequiredMixin, View):
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
             return render(request, '403.html')
+
 
 
 def like_photo(request, post_id):
