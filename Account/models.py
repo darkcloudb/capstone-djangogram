@@ -8,7 +8,7 @@ from django.db.models.fields import IntegerField
 
 class MyUser(AbstractUser):
     username = models.CharField(max_length=30, unique=True)
-    bio = models.CharField(max_length=200)
+    bio = models.CharField(max_length=200, blank=True, null=True)
     age = IntegerField(default=0, null=True, blank=True)
     prof_pic = models.ImageField(
         default='default.jpg', upload_to='pics/')

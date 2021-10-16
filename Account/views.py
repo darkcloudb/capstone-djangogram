@@ -48,4 +48,6 @@ class EditProfile(LoginRequiredMixin, View):
             profile.prof_pic = data['prof_pic']
             profile.save()
             return HttpResponseRedirect(reverse('profile', args=(id,)))
+        else:
+            return render(request, '500.html')
         return HttpResponseRedirect(reverse('profile', args=(id,)))

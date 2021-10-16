@@ -33,7 +33,10 @@ class PostDetail(LoginRequiredMixin, View):
     def get(self, request, post_id):
         post = PostImg.objects.filter(id=post_id).first()
         form = CommentForm()
-        return render(request, 'post_detail.html', {'post': post, "form": form})
+        if PostImg.objects.filter(id=post_id).exists():
+            return render(request, 'post_detail.html', {'post': post, "form": form})
+        else:
+            return render(request, '404.html')
 
     def post(self, request, post_id):
         grab = PostImg.objects.get(id=post_id)
