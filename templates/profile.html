@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<h1>
+<div class="profile">
   <img
     class="prof_border"
     src="{{ profile.prof_pic.url }}"
@@ -7,10 +7,8 @@
     height="50"
   />
   {{profile.username}}
-</h1>
-<div>
   <p>Bio: {{profile.bio}}</p>
   <p>Age: {{profile.age}}</p>
+  <a href="/edit/{{profile.id}}"><button>Edit</button></a>
 </div>
-<a href="/edit/{{profile.id}}"><button>Edit</button></a>
 {% endblock %}
