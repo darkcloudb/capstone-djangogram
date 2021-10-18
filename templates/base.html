@@ -140,6 +140,12 @@
         <a href="/post/">✉</a>
         <a href="/profile/{{request.user.id}}/">↔</a>
         <a href="/logout/">🔚</a>
+        <img
+          class="prof_border"
+          src="{{ request.user.prof_pic.url }}"
+          width="50"
+          height="50"
+        />
         {% endif %}
       </div>
       <div class="middle">
