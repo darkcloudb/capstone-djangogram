@@ -22,6 +22,8 @@ from Account import views as act_view
 from Photo import views as p_view
 from Comment import views as c_view
 from Video import views as v_view
+from config import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,3 +43,10 @@ urlpatterns = [
     path('video/', v_view.play_vid),
     path('video_page/', act_view.vid_page)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = "config.views.page_not_found_view"
+
+#handler500 = "config.views.nice_job_view"
+
+handler403 = "config.views.forbidden_view"
+

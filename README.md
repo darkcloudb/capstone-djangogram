@@ -49,10 +49,10 @@ python -m pip install Pillow
 ```
 
 Again be sure to be in the venv.
+
 Now try running the server via:
 
 ```
 python manage.py runserver
 ```
 
-## Insert Photos of Sample

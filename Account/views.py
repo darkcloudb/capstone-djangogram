@@ -10,6 +10,7 @@ from django.http import HttpResponseForbidden
 from Video.models import Vid
 # Create your views here.
 
+
 class LoggedInView(LoginRequiredMixin, View):
     def get(self, request):
         posts = PostImg.objects.all().order_by('-posted_at')
@@ -21,27 +22,38 @@ def profile_detail(request, id):
     profile = MyUser.objects.get(id=id)
     context = {"profile": profile}
     return render(request, template_name, context)
-
-
-@login_required
-def edit(request, id=None, template_name='profile.html'):
-    if id:
-        bio = get_object_or_404(MyUser, pk=id)
-        if bio.username != request.user:
-            return HttpResponseForbidden()
-    else:
-        bio = MyUser(username=request.user)
-        form = EditBioForm(request.POST or None, instance=bio)
-        if request.POST and form.is_valid():
-            form.save()
-            redirect_url = reverse('bio_save_success')
-            return redirect(redirect_url)
-    return render(request, template_name, {
-        'form': form
-    })
-
-
+  
 @login_required
 def vid_page(request):
     video = Vid.objects.all().order_by('-posted_at')
     return render(request, 'video_page.html',{'video': video})
+
+ class EditProfile(LoginRequiredMixin, View):
+    def get(self, request, id):
+        profile = MyUser.objects.get(id=id)
+        if request.user.id == id:
+            form = EditBioForm(initial={
+                'bio': profile.bio,
+                'age': profile.age,
+                'email': profile.email,
+            })
+            return render(request, 'generic_form.html', {'form': form})
+        else:
+            return render(request, '403.html')
+
+    def post(self, request, id):
+        profile = MyUser.objects.get(id=id)
+        form = EditBioForm(request.POST, request.FILES)
+        print(profile)
+        if form.is_valid():
+            data = form.cleaned_data
+            profile.bio = data['bio']
+            profile.age = data['age']
+            profile.email = data['email']
+            profile.prof_pic = data['prof_pic']
+            profile.save()
+            return HttpResponseRedirect(reverse('profile', args=(id,)))
+        else:
+            return render(request, '500.html')
+        return HttpResponseRedirect(reverse('profile', args=(id,)))
+

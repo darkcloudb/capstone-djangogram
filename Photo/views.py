@@ -33,7 +33,12 @@ class PostDetail(LoginRequiredMixin, View):
     def get(self, request, post_id):
         post = PostImg.objects.filter(id=post_id).first()
         form = CommentForm()
-        return render(request, 'post_detail.html', {'post': post, "form": form})
+        if PostImg.objects.filter(id=post_id).exists():
+            return render(request, 'post_detail.html', {'post': post, "form": form})
+        else:
+            return render(request, '404.html')
+
+
 
     def post(self, request, post_id):
         grab = PostImg.objects.get(id=post_id)
@@ -59,7 +64,10 @@ class PostDelete(LoginRequiredMixin, View):
             post.delete()
             return redirect(reverse('homepage'))
         else:
-            return HttpResponse("Access Denied - Only Original Poster or Admin can delete this image.")
+            # return HttpResponse("Access Denied - Only Original Poster or Admin can delete this image.")
+            return render(request, '403.html')
+
+
 
 
 class CommentDelete(LoginRequiredMixin, View):
@@ -69,7 +77,7 @@ class CommentDelete(LoginRequiredMixin, View):
             comment.delete()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponse("Access Denied - You do not have permission to delete this comment.")
+            return render(request, '403.html')
 
 
 class SuperDelete(LoginRequiredMixin, View):
@@ -80,7 +88,8 @@ class SuperDelete(LoginRequiredMixin, View):
             comment.delete()
             return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
         else:
-            return HttpResponse("Access Denied - You do not have permission to delete this comment.")
+            return render(request, '403.html')
+
 
 
 def like_photo(request, post_id):

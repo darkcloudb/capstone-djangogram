@@ -47,12 +47,14 @@
         background-color: white;
         width: 400px;
         border: solid 1px lightgray;
+        padding-bottom: 10px;
+
       }
       input {
         margin-left: 5px;
       }
       form {
-        margin-left: 5px;
+        margin-left: 10px;
       }
       .image {
         border-bottom: solid 1px lightgray;
@@ -67,6 +69,7 @@
         border: solid 1px lightgray;
         background-color: white;
         border-radius: 5%;
+        padding-bottom: 15px;
       }
       .comments--section {
         width: 600px;
@@ -99,6 +102,28 @@
       }
       .sign {
         font-family: "Snell Roundhand";
+        border-bottom: 1px solid lightgray;
+        text-align: center;
+        padding-bottom: 15px;
+      }
+
+      .prof_border {
+        border-radius: 50%;
+      }
+      .account {
+        padding-left: 10px;
+        text-align: center;
+      }
+      .formmid {
+        text-align: center;
+      }
+      .profile {
+        background-color: white;
+        width: 400px;
+        border: solid 1px lightgray;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5%;
       }
     </style>
   </head>
@@ -116,8 +141,14 @@
         <a href="/video_page/">📺</a>
         <a href="/post/">✉</a>
         <a href="/video/">📹</a>
-        <a href="/profile/">↔</a>
+        <a href="/profile/{{request.user.id}}/">↔</a>
         <a href="/logout/">🔚</a>
+        <img
+          class="prof_border"
+          src="{{ request.user.prof_pic.url }}"
+          width="50"
+          height="50"
+        />
         {% endif %}
       </div>
       <div class="middle">
