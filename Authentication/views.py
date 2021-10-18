@@ -11,7 +11,6 @@ from django.contrib import messages
 # Create your views here.
 # Login, Signup, and Logout views
 
-
 class SignupView(View):
     def get(self, request):
         form = SignUpForm()
@@ -48,6 +47,7 @@ class SignupView(View):
             return render(request, 'signup.html', {'form': form})
 
 
+
 class LoginView(View):
     def get(self, request):
         form = LoginForm()
@@ -68,10 +68,9 @@ class LoginView(View):
             else:
                 return render(request, 'incorrect.html')
 
-
-
 class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect(reverse('homepage'))
+
 

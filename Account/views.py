@@ -1,11 +1,14 @@
-
-from django.shortcuts import render, reverse, HttpResponseRedirect, get_object_or_404, redirect
+from django.shortcuts import render, reverse, HttpResponse, HttpResponseRedirect, get_object_or_404, redirect
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from Account.forms import EditBioForm
 from Account.models import MyUser
 from Photo.models import PostImg
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
+
+from Video.models import Vid
+# Create your views here.
 
 
 class LoggedInView(LoginRequiredMixin, View):
@@ -19,9 +22,13 @@ def profile_detail(request, id):
     profile = MyUser.objects.get(id=id)
     context = {"profile": profile}
     return render(request, template_name, context)
+  
+@login_required
+def vid_page(request):
+    video = Vid.objects.all().order_by('-posted_at')
+    return render(request, 'video_page.html',{'video': video})
 
- 
-class EditProfile(LoginRequiredMixin, View):
+ class EditProfile(LoginRequiredMixin, View):
     def get(self, request, id):
         profile = MyUser.objects.get(id=id)
         if request.user.id == id:

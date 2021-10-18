@@ -50,14 +50,9 @@ python -m pip install Pillow
 
 Again be sure to be in the venv.
 
-Finally we need to install WhiteNoise (this is so the staticfiles run when DEBUG has been set to False)
-
-```
-pip install Whitenoise
-```
-
 Now try running the server via:
 
 ```
 python manage.py runserver
 ```
+

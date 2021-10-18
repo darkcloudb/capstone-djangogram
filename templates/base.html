@@ -48,6 +48,7 @@
         width: 400px;
         border: solid 1px lightgray;
         padding-bottom: 10px;
+
       }
       input {
         margin-left: 5px;
@@ -136,8 +137,10 @@
         <a href="/">🏠</a>
         <a href="/login/">↩</a>
         {% else %}
-        <a href="/">🏠</a>
+        <a href="/">🏠</a> 
+        <a href="/video_page/">📺</a>
         <a href="/post/">✉</a>
+        <a href="/video/">📹</a>
         <a href="/profile/{{request.user.id}}/">↔</a>
         <a href="/logout/">🔚</a>
         <img
