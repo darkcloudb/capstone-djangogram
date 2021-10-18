@@ -15,7 +15,7 @@ def play_vid(request):
         data = form.cleaned_data
         Vid.objects.create(username=request.user, vid_file=data['vid_file'])
 
-        return HttpResponseRedirect(reverse('home'))
+        return HttpResponseRedirect(reverse('homepage'))
     form = Vid_Form()
 
     

@@ -6,6 +6,8 @@ from Account.models import MyUser
 from Photo.models import PostImg
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+
+from Video.models import Vid
 # Create your views here.
 
 class LoggedInView(LoginRequiredMixin, View):
@@ -37,3 +39,9 @@ def edit(request, id=None, template_name='profile.html'):
     return render(request, template_name, {
         'form': form
     })
+
+
+@login_required
+def vid_page(request):
+    video = Vid.objects.all().order_by('-posted_at')
+    return render(request, 'video_page.html',{'video': video})

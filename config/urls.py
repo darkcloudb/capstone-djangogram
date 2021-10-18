@@ -39,4 +39,5 @@ urlpatterns = [
     path('like/<int:post_id>/', p_view.like_photo),
     path('unlike/<int:post_id>/', p_view.unlike_photo),
     path('video/', v_view.play_vid),
+    path('video_page/', act_view.vid_page)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
