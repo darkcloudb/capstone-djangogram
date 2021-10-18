@@ -41,7 +41,7 @@ urlpatterns = [
     path('like/<int:post_id>/', p_view.like_photo),
     path('unlike/<int:post_id>/', p_view.unlike_photo),
     path('video/', v_view.play_vid),
-    path('video_page/', act_view.vid_page),
+    path('video_page/', act_view.vid_page, name='video'),
     path('viddelete/<int:post_id>/', v_view.VidDelete.as_view())
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
