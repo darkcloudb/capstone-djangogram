@@ -1,7 +1,14 @@
-{% extends 'base.html' %} {% block content %}
-{% for vid in video %}
-<video width='400' controls>
-    <source src='{{ vid.vid_file.url }}{{ vid_file }}' type='video/mp4'>
+{% extends 'base.html' %} {% block content %} {% for vid in video %}
+<div class="post">
+  <video width="400" controls>
+    <source src="{{ vid.vid_file.url }}{{ vid_file }}" type="video/mp4" />
     Your browser does not support the video tag.
-    </video>
+  </video>
+  <p class="like">
+    {% if request.user.is_staff or request.user == vid.username %} &nbsp;
+    <a href="/viddelete/{{ vid.id }}/"><button>Delete &#9760;</button></a>
+    {% else %} &nbsp; {% endif %}
+    <em>&nbsp;Posted by: <b>{{vid.username}}</b> {{ vid.posted_at }}</em>
+  </p>
+</div>
 {% endfor %} {% endblock %}

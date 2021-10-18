@@ -22,13 +22,15 @@ def profile_detail(request, id):
     profile = MyUser.objects.get(id=id)
     context = {"profile": profile}
     return render(request, template_name, context)
-  
+
+
 @login_required
 def vid_page(request):
     video = Vid.objects.all().order_by('-posted_at')
-    return render(request, 'video_page.html',{'video': video})
+    return render(request, 'video_page.html', {'video': video})
 
- class EditProfile(LoginRequiredMixin, View):
+
+class EditProfile(LoginRequiredMixin, View):
     def get(self, request, id):
         profile = MyUser.objects.get(id=id)
         if request.user.id == id:
@@ -56,4 +58,3 @@ def vid_page(request):
         else:
             return render(request, '500.html')
         return HttpResponseRedirect(reverse('profile', args=(id,)))
-

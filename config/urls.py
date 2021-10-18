@@ -36,17 +36,17 @@ urlpatterns = [
     path('delete/<int:post_id>/', p_view.PostDelete.as_view()),
     path('uncomment/<int:post_id>/', p_view.CommentDelete.as_view()),
     path('superdel/<int:post_id>/', p_view.SuperDelete.as_view()),
-    path('profile/<int:id>/', act_view.profile_detail),
-    path('edit/<int:id>/', act_view.edit),
+    path('profile/<int:id>/', act_view.profile_detail, name='profile'),
+    path('edit/<int:id>/', act_view.EditProfile.as_view()),
     path('like/<int:post_id>/', p_view.like_photo),
     path('unlike/<int:post_id>/', p_view.unlike_photo),
     path('video/', v_view.play_vid),
-    path('video_page/', act_view.vid_page)
+    path('video_page/', act_view.vid_page),
+    path('viddelete/<int:post_id>/', v_view.VidDelete.as_view())
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = "config.views.page_not_found_view"
 
-#handler500 = "config.views.nice_job_view"
+# handler500 = "config.views.nice_job_view"
 
 handler403 = "config.views.forbidden_view"
-
