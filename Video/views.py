@@ -29,7 +29,7 @@ class VidDelete(LoginRequiredMixin, View):
         post = Vid.objects.get(id=post_id)
         if request.user.is_staff or request.user == post.username:
             post.delete()
-            return redirect(reverse('homepage'))
+            return redirect(reverse('video'))
         else:
             # return HttpResponse("Access Denied - Only Original Poster or Admin can delete this image.")
             return render(request, '403.html')
