@@ -130,3 +130,6 @@ dmypy.json
 
 # Secret Key File
 .env
+
+# ignore media folder
+media/
