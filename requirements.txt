@@ -1,4 +1,3 @@
-asgiref @ file:///Users/Birii/Library/Caches/pypoetry/artifacts/c3/92/1c/3d42ce7ad1e9e2aa1621c3fa8ebc5e21bd880a768bd691fb4f0356baa8/asgiref-3.4.1-py3-none-any.whl
 dj-static==0.0.6
 Django @ file:///Users/Birii/Library/Caches/pypoetry/artifacts/9e/03/4f/a780a179f26fc123c23f2998dea5a701b4f96aec96d3b0565c85f16661/Django-3.2.8-py3-none-any.whl
 django-environ==0.7.0
