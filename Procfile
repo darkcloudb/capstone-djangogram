@@ -1,3 +1,1 @@
-web: gunicorn config.wsgi:application --log-file - --log-level debug
-python manage.py collectstatic --noinuput
-manage.py migrate
+web: gunicorn config.wsgi:application --bind 0.0.0.0:$PORT djangogram:app
