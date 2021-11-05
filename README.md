@@ -56,3 +56,12 @@ Now try running the server via:
 python manage.py runserver
 ```
 
+## Useful reminders
+
+```
+pip freeze > requirements.txt
+```
+
+```
+pip install django gunicorn whitenoise dj-database-url psycopg2
+```
